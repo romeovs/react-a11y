@@ -5,7 +5,7 @@ import { expect } from 'chai'
 
 const recieves = function (name, type) {
   it(`recieves \`${name}\``, done => {
-    
+
     const div = document.createElement('div')
     document.body.appendChild(div)
 
