@@ -125,9 +125,8 @@ export default class A11y {
                 const _this = this;
                 const instance = owner._instance;
 
-                // Cannot log a node reference until the component is in the DOM,
-                // so defer the call until componentDidMount or componentDidUpdate.
                 const getDOMNode = () => {
+                    // unpack the ref
                     let DOMNode = null;
                     if (typeof ref === 'string') {
                         DOMNode = _this.ReactDOM.findDOMNode(instance.refs[ref]); // TODO: replace use of findDOMNode
@@ -138,10 +137,12 @@ export default class A11y {
                 };
                 const DOMNode = getDOMNode();
                 if (DOMNode) {
+                    // If we're already rendered, call reporter immediately
                     reporter({ ...info, DOMNode });
                 } else {
+                    // Cannot log a node reference until the component is in the DOM,
+                    // so defer the call until componentDidMount or componentDidUpdate.
                     after.render(instance, () => {
-                        // unpack the ref
                         const DOMNode = getDOMNode();
                         if (!DOMNode) {
                             throw new Error('could not resolve ref');
