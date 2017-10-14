@@ -127,7 +127,7 @@ export default class A11y {
 
                 const getDOMNode = () => {
                     // unpack the ref
-                    let DOMNode = null;
+                    let DOMNode = false;
                     if (typeof ref === 'string') {
                         DOMNode = _this.ReactDOM.findDOMNode(instance.refs[ref]); // TODO: replace use of findDOMNode
                     } else if ('node' in ref) {
